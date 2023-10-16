@@ -26,18 +26,18 @@ class CartManager{
         }
     };
 
-    async addCart(newCart){
+    async addCart(){
         try {
             if(this.fileExist()){
                 const carts = await this.getCarts()
-                const addedCart = {products: newCart}
+                const addedCart = {products: []}
 
                 let listLength = carts.length;
                 if(listLength === 0){
-                    addedCart.id = 1
+                    addedCart.idCart = 1
                 }
                 else{
-                    addedCart.id =carts[listLength - 1].id + 1;
+                    addedCart.idCart =carts[listLength - 1].idCart + 1;
                 }
                 carts.push(addedCart);
                 await fs.promises.writeFile(this.path, JSON.stringify(carts))
@@ -54,7 +54,7 @@ class CartManager{
         try {
             if(this.fileExist()){
                 const cartsList = await this.getCarts()
-                let cart = cartsList.find((p) => p.id === id);
+                let cart = cartsList.find((p) => p.idCart === id);
                 if(!cart){
                     throw new Error("Cart doesn't exist")
                 }
@@ -71,7 +71,7 @@ class CartManager{
         try {
             if(this.fileExist()){
                 const carts = await this.getCarts()
-                const cartIndex = carts.map(p => p.id).indexOf(cartId);
+                const cartIndex = carts.map(p => p.idCart).indexOf(cartId);
                 if(cartIndex != -1){
                     const productsList = carts[cartIndex].products
 

@@ -36,8 +36,7 @@ router.get("/:cid", async (req, res)=>{
 
 router.post("/", async (req, res) =>{
     try {
-        const newCart = req.body
-        let result = await cartsService.addCart(newCart)
+        let result = await cartsService.addCart()
         res.send(result)
     } catch (error) {
         res.send(error)
