@@ -1,10 +1,53 @@
 [
     {
-        "products":[{"title":"Product A","description":"Test Product","price":1,"thumbnail":"No image","code":"abc1","stock":1,"category":"Cart A","status":true,"id":1},{"title":"Product B","description":"Test Product","price":1,"thumbnail":"No image","code":"abc2","stock":1,"category":"Cart A","status":true,"id":2,"quantity":2},{"title":"Product C","description":"Test Product","price":1,"thumbnail":"No image","code":"abc3","stock":1,"category":"cart A","status":true,"id":3},{"quantity":1,"id":4}],
-        "id":1
+        "products": [
+            {
+                "quantity": 1,
+                "id": 1
+            },
+            {
+                "quantity": 1,
+                "id": 2
+            },
+            {
+                "quantity": 1,
+                "id": 3
+            }
+        ],
+        "id": 1
     },
     {
-        "products":[{"title":"Product A","description":"Test Product","price":1,"thumbnail":"No image","code":"abc1","stock":1,"category":"some","status":true,"id":1},{"title":"Product B","description":"Test Product","price":1,"thumbnail":"No image","code":"abc2","stock":1,"category":"some","status":true,"id":2},{"title":"Product C","description":"Test Product","price":1,"thumbnail":"No image","code":"abc3","stock":1,"category":"some","status":true,"id":3}],
-        "id":2
+        "products": [
+            {
+                "quantity": 1,
+                "id": 1
+            },
+            {
+                "quantity": 1,
+                "id": 2
+            },
+            {
+                "quantity": 1,
+                "id": 3
+            }
+        ],
+        "id": 2
+    },
+    {
+        "products": [
+            {
+                "quantity": 1,
+                "id": 1
+            },
+            {
+                "quantity": 1,
+                "id": 2
+            },
+            {
+                "quantity": 1,
+                "id": 3
+            }
+        ],
+        "id": 3
     }
 ]

@@ -42,6 +42,7 @@ class ProductManager{
                     }
                     products.push(newProd);
                     await fs.promises.writeFile(this.path, JSON.stringify(products))
+                    return products
                 };    
             }
         } catch (error) {
@@ -75,6 +76,7 @@ class ProductManager{
                 let oldProd = productsList.map(p => p.id).indexOf(prodId)
                 productsList[oldProd] = {...productsList[oldProd], ...updatedProd};
                 await fs.promises.writeFile(this.path, JSON.stringify(productsList));
+                return productsList
             }
         } catch (error) {
             throw new Error(`Failed to update product: ${error}`)
@@ -88,6 +90,7 @@ class ProductManager{
                 let prod = productsList.map(p => p.id).indexOf(prodId);
                 productsList.splice(prod, 1)
                 await fs.promises.writeFile(this.path, JSON.stringify(productsList));
+                return productsList
             }
         } catch (error) {
             throw new Error(`Failed to eliminate product: ${error}`)

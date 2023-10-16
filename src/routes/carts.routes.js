@@ -37,7 +37,8 @@ router.get("/:cid", async (req, res)=>{
 router.post("/", async (req, res) =>{
     try {
         const newCart = req.body
-        cartsService.addCart(newCart)
+        let result = await cartsService.addCart(newCart)
+        res.send(result)
     } catch (error) {
         res.send(error)
     }
@@ -45,11 +46,11 @@ router.post("/", async (req, res) =>{
 
 router.post("/:cid/products/:pid", async (req, res)=>{
     try {
-        const newProduct = req.body
         const cartId = parseInt(req.params.cid)
         const productId = parseInt(req.params.pid)
         
-        cartsService.addCartProduct(newProduct, cartId, productId)
+        let result = await cartsService.addCartProduct(cartId, productId)
+        res.send(result)
     } catch (error) {
         res.send(error)
     }

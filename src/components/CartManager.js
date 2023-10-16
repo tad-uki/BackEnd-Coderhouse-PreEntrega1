@@ -41,6 +41,7 @@ class CartManager{
                 }
                 carts.push(addedCart);
                 await fs.promises.writeFile(this.path, JSON.stringify(carts))
+                return carts
             }
         } catch (error) {
             throw new Error(`Failed to add cart: ${error}`)
@@ -66,32 +67,33 @@ class CartManager{
         }
     };
 
-    async addCartProduct(newProd, cartId, prodId){
+    async addCartProduct(cartId, prodId){
         try {
             if(this.fileExist()){
                 const carts = await this.getCarts()
                 const cartIndex = carts.map(p => p.id).indexOf(cartId);
-                const productsList = carts[cartIndex].products
+                if(cartIndex != -1){
+                    const productsList = carts[cartIndex].products
 
-                if(productsList.some((p)=>p.id === prodId)){
-                    const prodIndex = productsList.map(p => p.id).indexOf(prodId);
-
-                    if(!productsList[prodIndex].quantity){
-                        productsList[prodIndex].quantity = newProd.quantity
+                    if(productsList.some((p)=>p.id === prodId)){
+                        const prodIndex = productsList.map(p => p.id).indexOf(prodId);
+                        productsList[prodIndex].quantity++
                     }
                     else{
-                        productsList[prodIndex].quantity += newProd.quantity
+                        let newProd = {
+                            quantity: 1,
+                            id: prodId
+                        }
+                        productsList.push(newProd)
                     }
+
+                    carts[cartIndex].products = productsList
+                    await fs.promises.writeFile(this.path, JSON.stringify(carts))
+                    return carts
                 }
                 else{
-                    newProd.id = prodId
-                    productsList.push(newProd)
+                    throw new Error("Cart doesn't exist.")
                 }
-
-                carts[cartIndex].products = productsList
-                await fs.promises.writeFile(this.path, JSON.stringify(carts))  
- 
-
             }
         } catch (error) {
             throw new Error(`Failed to add product: ${error}`)

@@ -42,8 +42,8 @@ router.get("/:pid", async (req, res)=>{
 router.post("/", async (req, res)=>{
     try {
         const newProduct = req.body
-        productsService.addProduct(newProduct)
-        
+        let result = await productsService.addProduct(newProduct)
+        res.send(result)
     } catch (error) {
         res.send(error)
     }
@@ -53,7 +53,8 @@ router.put("/:pid", async (req, res)=>{
     try {
         const idParam = parseInt(req.params.pid)
         const updProduct = req.body
-        productsService.updateProduct(idParam, updProduct)
+        let result = await productsService.updateProduct(idParam, updProduct)
+        res.send(result)
     } catch (error) {
         res.send(error)
     }
@@ -62,7 +63,8 @@ router.put("/:pid", async (req, res)=>{
 router.delete("/:pid", async (req, res)=>{
     try {
         const idParam = parseInt(req.params.pid)
-        productsService.deleteProduct(idParam)
+        let result = await productsService.deleteProduct(idParam)
+        res.send(result)
     } catch (error) {
         res.send(error)
     }
